@@ -798,6 +798,11 @@ void initializeLCD()
 #ifdef U8GLIB_ST7565_NHD_C2832_SW_SPI
 u8g_InitSPI(&u8g,&u8g_dev_st7565_nhd_c12864_sw_spi,UI_DISPLAY_D4_PIN,UI_DISPLAY_ENABLE_PIN,UI_DISPLAY_RS_PIN,UI_DISPLAY_D5_PIN,U8G_PIN_NONE);
 #endif
+
+#ifdef U8GLIB_MINI12864
+    u8g_InitHWSPI(&u8g,&u8g_dev_uc1701_mini12864_hw_spi,25,27,U8G_PIN_NONE);
+#endif
+
     u8g_Begin(&u8g);
 #ifdef UI_ROTATE_180
     u8g_SetRot180(&u8g);

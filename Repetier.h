@@ -160,6 +160,7 @@ usage or for searching for memory induced errors. Switch it off for production, 
 #define CONTROLLER_LCD_MP_PHARAOH_DUE 22
 #define CONTROLLER_SPARKLCD_ADAPTER 23
 #define CONTROLLER_ZONESTAR 24
+#define CONTROLLER_MINI12864 25
 #define CONTROLLER_FELIX_DUE 405
 
 //direction flags

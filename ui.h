@@ -642,9 +642,10 @@ inline void uiCheckSlowEncoder() {}
 void uiCheckSlowKeys(uint16_t &action) {}
 #endif // UI_MAIN
 #endif // NO_CONTROLLER
-#if (FEATURE_CONTROLLER == CONTROLLER_SMARTRAMPS) || (FEATURE_CONTROLLER == CONTROLLER_GADGETS3D_SHIELD) || (FEATURE_CONTROLLER == CONTROLLER_REPRAPDISCOUNT_GLCD)  || (FEATURE_CONTROLLER == CONTROLLER_BAM_DICE_DUE)
+#if (FEATURE_CONTROLLER == CONTROLLER_SMARTRAMPS) || (FEATURE_CONTROLLER == CONTROLLER_GADGETS3D_SHIELD) || (FEATURE_CONTROLLER == CONTROLLER_REPRAPDISCOUNT_GLCD)  || (FEATURE_CONTROLLER == CONTROLLER_BAM_DICE_DUE) || (FEATURE_CONTROLLER == CONTROLLER_MINI12864)
 #define UI_HAS_KEYS 1
 #define UI_HAS_BACK_KEY 0
+
 #if FEATURE_CONTROLLER == CONTROLLER_REPRAPDISCOUNT_GLCD
 #define UI_DISPLAY_TYPE DISPLAY_U8G
 #define U8GLIB_ST7920
@@ -662,7 +663,35 @@ void uiCheckSlowKeys(uint16_t &action) {}
 #undef UI_ANIMATION
 #define UI_ANIMATION 0  // Animations are too slow
 #endif
+//calculate rows and cols available with current font
+#define UI_COLS (UI_LCD_WIDTH/UI_FONT_WIDTH)
+#define UI_ROWS (UI_LCD_HEIGHT/UI_FONT_HEIGHT)
+#define UI_DISPLAY_CHARSET 3
+#else // 40x4 char display
+#define UI_DISPLAY_TYPE DISPLAY_4BIT
+#define UI_DISPLAY_CHARSET 1
+#define UI_COLS 20
+#define UI_ROWS 4
+#endif
 
+
+#if FEATURE_CONTROLLER == CONTROLLER_MINI12864
+#define UI_DISPLAY_TYPE DISPLAY_U8G
+#define U8GLIB_MINI12864
+#define UI_LCD_WIDTH 128
+#define UI_LCD_HEIGHT 64
+//select font size
+#define UI_FONT_6X10 //default font
+#ifdef UI_FONT_6X10
+#define UI_FONT_WIDTH 6
+#define UI_FONT_HEIGHT 10
+#define UI_FONT_SMALL_HEIGHT 7
+#define UI_FONT_DEFAULT repetier_6x10
+#define UI_FONT_SMALL repetier_5x7
+#define UI_FONT_SMALL_WIDTH 5 //smaller font for status display
+#undef UI_ANIMATION
+#define UI_ANIMATION 0  // Animations are too slow
+#endif
 //calculate rows and cols available with current font
 #define UI_COLS (UI_LCD_WIDTH/UI_FONT_WIDTH)
 #define UI_ROWS (UI_LCD_HEIGHT/UI_FONT_HEIGHT)
@@ -853,7 +882,7 @@ void uiCheckSlowKeys(uint16_t &action) {}
 #endif // smartcontroller
 #define UI_DELAYPERCHAR 50
 #if FEATURE_CONTROLLER == CONTROLLER_BAM_DICE_DUE
-#define UI_ENCODER_SPEED 2
+#define  2
 #endif
 #ifndef UI_INVERT_MENU_DIRECTION
 #define UI_INVERT_MENU_DIRECTION 0
@@ -1340,7 +1369,7 @@ void uiCheckSlowKeys(uint16_t &action) {}
 #define UI_DISPLAY_CHARSET 1
 #define UI_COLS 20
 #define UI_ROWS 4
-#define UI_ENCODER_SPEED 2
+#define  2
 #undef BEEPER_TYPE
 #define BEEPER_TYPE 0
 #undef BEEPER_PIN
@@ -1681,7 +1710,7 @@ void uiCheckSlowKeys(uint16_t &action) {}
 #define UI_HAS_BACK_KEY 0
 #define UI_INVERT_MENU_DIRECTION 0
 #define UI_HAS_I2C_ENCODER 0
-#define UI_ENCODER_SPEED 2
+#define  2
 
 //calculate rows and cols available with current font
 #define UI_COLS (UI_LCD_WIDTH/UI_FONT_WIDTH)
@@ -1757,8 +1786,8 @@ void uiCheckSlowKeys(uint16_t &action) {}
 #define UI_ROWS (UI_LCD_HEIGHT/UI_FONT_HEIGHT)
 #define UI_DISPLAY_CHARSET 3
 #define UI_INVERT_MENU_DIRECTION 0
-#undef UI_ENCODER_SPEED
-#define UI_ENCODER_SPEED 2
+#undef 
+#define  2
 #define SDCARDDETECT        -1
 #define UI_DISPLAY_RW_PIN -1
 #define UI_ROTATE_180
